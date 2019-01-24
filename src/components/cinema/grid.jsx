@@ -1,17 +1,27 @@
 import React, { Component } from "react";
 import _ from "lodash";
 
-export const CinemaSeat = ({ onClick, seatNum }) => {
+export const CinemaSeat = ({ onClick, seatNum, bookSymbol }) => {
 	return (
-		<div>
-			<div className="cinema__seat" onClick={onClick}>
-				<p>{seatNum}</p>
+		<div className="grid__parent">
+			<div
+				className="cinema__seat"
+				onClick={onClick}
+				style={{
+					color: "red",
+					display: " block"
+				}}>
+				<p>
+					{seatNum}
+					{bookSymbol}
+				</p>{" "}
+				<br />
 			</div>
 		</div>
 	);
 };
 
-export const CinemaGrid = () => {
+export const CinemaGrid = ({ onClick, bookSymbol }) => {
 	let rows = 21;
 	let columns = [
 		"A",
@@ -39,31 +49,37 @@ export const CinemaGrid = () => {
 	// console.log(16 * 20);
 	let gridMap = rows.map(x => {
 		return columnsNumber.map(y => {
-			console.log(columns[y] + x);
-			return columns[y] + x;
+			const seatNames = columns[y] + x;
+			return (
+				<CinemaSeat
+					seatNum={seatNames}
+					key={seatNames}
+					onClick={onClick}
+					bookSymbol={bookSymbol}
+				/>
+			);
 		});
 	});
 
-	// const travserse =
-	console.log(gridMap);
-	return (
-		<div>
-			{/* <table className="grid" /> */}
-			{gridMap.map(x => {
-				return <CinemaSeat />;
-			})}
-			<p>This is a simple thing</p>
-			{/* {gridMap()} */}
-			{/* <CinemaSeat /> */}
-		</div>
-	);
+	return <div>{gridMap}</div>;
 };
 
 export default class Grid extends Component {
+	state = {
+		bookStatus: false,
+		unbookedStatusSymbol: "*",
+		bookedStatusSymbol: "#"
+	};
+	onclickHandler = e => {
+		console.log("You have clicked this element");
+	};
 	render() {
 		return (
 			<div>
-				<CinemaGrid />
+				<CinemaGrid
+					onClick={this.onclickHandler}
+					bookSymbol={this.state.unbookedStatusSymbol}
+				/>
 			</div>
 		);
 	}

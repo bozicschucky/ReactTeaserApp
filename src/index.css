@@ -1,26 +1,14 @@
 .cinema__seat{
   background-color: bisque;
-  width: 3%;
-  padding:5px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  border: 20px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-left-color: black;
-  border-left-style: solid;
-  border-left-width: 1px;
-  border-right-color: black;
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-top-color: black;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-bottom-color: black;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  width: 50px;
+  height: 50px;
+  outline: 1px solid;
+  float: left;
+  vertical-align:top;
+  /* display:inline-block; */
+  /* display:inline-table */
+}
+
+.grid__parent{
+  display:block;
 }
