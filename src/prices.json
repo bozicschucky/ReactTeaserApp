@@ -1,0 +1,8 @@
+{
+	"cinemaPrices": {
+		"twinSeats": 25000,
+		"veryVip": 10000,
+		"vip": 50000,
+		"Economy": 25000
+	}
+}
