@@ -38,7 +38,7 @@ export class CinemaSeat extends Component {
 						this.state.bookStatus ? this.onDeactivateBook : this.onClickHandler
 					}
 					style={{
-						color: "red",
+						color: this.props.color || "red",
 						display: " block"
 					}}>
 					<p>
@@ -76,211 +76,62 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 	let columnsNumber = _.range(1, columns);
 	rows = _.range(1, rows);
 	const seats = [];
-	const vVipSeats = [];
-	const vipSeats = [];
-	const economySeats = [];
-
-	// console.log(rowElements[0]);
-	// console.log(columnsNumber);
-	// console.log(rows);
-	// console.log(16 * 20);
 	for (let i = 0; i < rows.length; i++) {
 		const row = rowElements[i];
-		// console.log(row);
 		for (let index = 1; index < columnsNumber.length; index++) {
 			const seatName = row + index;
-			// console.log(seatName);
 			seats.push(seatName);
-
-			if (
-				seatName.startsWith("C") ||
-				seatName.startsWith("D") ||
-				seatName.startsWith("E") ||
-				seatName.startsWith("F")
-			) {
-				// console.log(seatName);
-				vVipSeats.push(
-					<CinemaSeat
-						seatName={seatName}
-						key={seatName}
-						bookSymbol={bookSymbol}
-						seatType="Vvip"
-						seatPrice={100000}
-					/>
-				);
-			} else if (
-				seatName.startsWith("M") ||
-				seatName.startsWith("N") ||
-				seatName.startsWith("O") ||
-				seatName.startsWith("P")
-			) {
-				// economySeats.push(seatName);
-				economySeats.push(
-					<CinemaSeat
-						seatName={seatName}
-						key={seatName}
-						bookSymbol={bookSymbol}
-						seatType="economy"
-						seatPrice={20000}
-					/>
-				);
-			} else if (
-				seatName.startsWith("G") ||
-				seatName.startsWith("H") ||
-				seatName.startsWith("I") ||
-				seatName.startsWith("J") ||
-				seatName.startsWith("K") ||
-				seatName.startsWith("L")
-			) {
-				vipSeats.push(
-					<CinemaSeat
-						seatName={seatName}
-						key={seatName}
-						bookSymbol={bookSymbol}
-						seatType="vip"
-						seatPrice={50000}
-					/>
-				);
-			}
 		}
 	}
-	const filteredSeats = _.filter(seats, x => {
-		if (x.startsWith("A") || x.startsWith("B")) {
-			return (
-				<CinemaSeat
-					seatName={x}
-					key={x}
-					bookSymbol={bookSymbol}
-					seatType="Vvip"
-					seatPrice={100000}
-				/>
-			);
-		}
-	});
-	const twinSeats = _.filter(filteredSeats, x => {
-		if (
-			x.startsWith("A5") ||
-			x.startsWith("A6") ||
-			x.startsWith("A7") ||
-			x.startsWith("A8") ||
-			x.startsWith("A9") ||
-			x.startsWith("A10") ||
-			x.startsWith("A11") ||
-			x.startsWith("A12") ||
-			x.startsWith("A13") ||
-			x.startsWith("A14") ||
-			x.startsWith("A15") ||
-			x.startsWith("A16") ||
-			x.startsWith("B5") ||
-			x.startsWith("B6") ||
-			x.startsWith("B7") ||
-			x.startsWith("B8") ||
-			x.startsWith("B9") ||
-			x.startsWith("B10") ||
-			x.startsWith("B11") ||
-			x.startsWith("B12") ||
-			x.startsWith("B13") ||
-			x.startsWith("B14") ||
-			x.startsWith("B15") ||
-			x.startsWith("B16")
-		) {
-			return (
-				<CinemaSeat
-					seatName={x}
-					key={x}
-					bookSymbol={bookSymbol}
-					seatType="Vvip"
-					seatPrice={100000}
-				/>
-			);
-		}
-	});
-	const otherVipSeats = _.filter(filteredSeats, x => {
-		if (
-			!x.startsWith("A5") &&
-			!x.startsWith("A6") &&
-			!x.startsWith("A7") &&
-			!x.startsWith("A8") &&
-			!x.startsWith("A9") &&
-			!x.startsWith("A10") &&
-			!x.startsWith("A11") &&
-			!x.startsWith("A12") &&
-			!x.startsWith("A13") &&
-			!x.startsWith("A14") &&
-			!x.startsWith("A15") &&
-			!x.startsWith("A16") &&
-			!x.startsWith("B5") &&
-			!x.startsWith("B6") &&
-			!x.startsWith("B7") &&
-			!x.startsWith("B8") &&
-			!x.startsWith("B9") &&
-			!x.startsWith("B10") &&
-			!x.startsWith("B11") &&
-			!x.startsWith("B12") &&
-			!x.startsWith("B13") &&
-			!x.startsWith("B14") &&
-			!x.startsWith("B15") &&
-			!x.startsWith("B16")
-		) {
-			return (
-				<CinemaSeat
-					seatName={x}
-					key={x}
-					bookSymbol={bookSymbol}
-					seatType="Vvip"
-					seatPrice={100000}
-				/>
-			);
-		}
-	});
-	const twinSeatComponents = _.map(twinSeats, x => {
-		return (
-			<CinemaSeat
-				seatName={x}
-				key={x}
-				bookSymbol={bookSymbol}
-				seatType="twinSeats"
-				seatPrice={100000}
-			/>
-		);
-	});
-	const otherVipSeatsComponents = _.map(otherVipSeats, x => {
-		return (
-			<CinemaSeat
-				seatName={x}
-				key={x}
-				bookSymbol={bookSymbol}
-				seatType="Vvip"
-				seatPrice={100000}
-			/>
-		);
-	});
 
-	// console.log(seats);
-	// console.info(vVipSeats);
-	console.log("+++++++-------->twinSeats ", twinSeats);
-	console.log("+++++++-------->othervVipSeats ", otherVipSeats);
-	// console.log("--------otherVipSeats", otherVipSeatsComponents);
-	// console.log("+++++++-------->otherVipSeats ", [
-	// 	...otherVipSeatsComponents,
-	// 	...vipSeats
-	// ]);
-	const allVipSeats = [...otherVipSeatsComponents, ...vipSeats];
-	// console.log("+++++++-------->Vvip ", vVipSeats);
-	// console.log("+++++++-------->vip ", vipSeats);
-	// console.log("--------------> economy", economySeats);
-	let allSeats = [
-		...twinSeatComponents,
-		...vVipSeats,
-		...allVipSeats,
-		...economySeats
-	];
-	let gridMap = allSeats.map(x => {
-		return x;
+	//generate the different seats using the seat indices
+	let gridMap = seats.map((x, index) => {
+		if ((index >= 4 && index <= 14) || (index >= 24 && index <= 34)) {
+			return (
+				<CinemaSeat
+					seatName={x}
+					key={x}
+					bookSymbol={bookSymbol}
+					seatType="TwinSeats"
+					seatPrice={25000}
+				/>
+			);
+		} else if (index >= 120 && index <= 239) {
+			return (
+				<CinemaSeat
+					seatName={x}
+					key={x}
+					bookSymbol={bookSymbol}
+					seatType="Vip"
+					color="Navy"
+					seatPrice={50000}
+				/>
+			);
+		} else if (index >= 240 && index <= 319) {
+			return (
+				<CinemaSeat
+					seatName={x}
+					key={x}
+					bookSymbol={bookSymbol}
+					color="Olive"
+					seatType="Economy"
+					seatPrice={20000}
+				/>
+			);
+		} else {
+			return (
+				<CinemaSeat
+					seatName={x}
+					key={x}
+					bookSymbol={bookSymbol}
+					seatType="Vvip"
+					color="green"
+					seatPrice={100000}
+				/>
+			);
+		}
 	});
-	// console.log(gridMap);
 	return <div>{gridMap}</div>;
-	// return <div>yoo cinema app</div>;
 };
 
 export default class Grid extends Component {
