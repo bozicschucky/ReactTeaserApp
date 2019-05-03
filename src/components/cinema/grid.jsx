@@ -15,9 +15,9 @@ export class CinemaSeat extends Component {
 		console.log(
 			"You have booked seat",
 			this.props.seatName,
-			"price",
+			"seat price ------->",
 			this.props.seatPrice,
-			"seatPrice",
+			"seat Category ------>",
 			this.props.seatType
 		);
 		this.setState({ bookStatus: true });
@@ -233,18 +233,48 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 			);
 		}
 	});
+	const twinSeatComponents = _.map(twinSeats, x => {
+		return (
+			<CinemaSeat
+				seatName={x}
+				key={x}
+				bookSymbol={bookSymbol}
+				seatType="twinSeats"
+				seatPrice={100000}
+			/>
+		);
+	});
+	const otherVipSeatsComponents = _.map(otherVipSeats, x => {
+		return (
+			<CinemaSeat
+				seatName={x}
+				key={x}
+				bookSymbol={bookSymbol}
+				seatType="Vvip"
+				seatPrice={100000}
+			/>
+		);
+	});
 
 	// console.log(seats);
+	// console.info(vVipSeats);
 	console.log("+++++++-------->twinSeats ", twinSeats);
-	console.log("--------otherVipSeats", otherVipSeats);
-	console.log("+++++++-------->otherVipSeats ", [
-		...otherVipSeats,
-		...vipSeats
-	]);
+	console.log("+++++++-------->othervVipSeats ", otherVipSeats);
+	// console.log("--------otherVipSeats", otherVipSeatsComponents);
+	// console.log("+++++++-------->otherVipSeats ", [
+	// 	...otherVipSeatsComponents,
+	// 	...vipSeats
+	// ]);
+	const allVipSeats = [...otherVipSeatsComponents, ...vipSeats];
 	// console.log("+++++++-------->Vvip ", vVipSeats);
 	// console.log("+++++++-------->vip ", vipSeats);
 	// console.log("--------------> economy", economySeats);
-	let allSeats = [...vVipSeats, ...vipSeats, ...economySeats];
+	let allSeats = [
+		...twinSeatComponents,
+		...vVipSeats,
+		...allVipSeats,
+		...economySeats
+	];
 	let gridMap = allSeats.map(x => {
 		return x;
 	});
