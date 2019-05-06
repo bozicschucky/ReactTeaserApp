@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addSeatPrices } from "../../actions/addPrice";
 import _ from "lodash";
 
 export class CinemaSeat extends Component {
@@ -20,8 +23,15 @@ export class CinemaSeat extends Component {
 			"seat Category ------>",
 			this.props.seatType
 		);
+		console.log(this.props);
 		this.setState({ bookStatus: true });
 		this.setState({ booked: "#" });
+		const { addPrice } = this.props;
+		addPrice({
+			seatPrice: this.props.seatPrice,
+			seatName: this.props.seatName,
+			seatType: this.props.seatType
+		});
 	};
 
 	onDeactivateBook = e => {
@@ -52,7 +62,11 @@ export class CinemaSeat extends Component {
 	}
 }
 
-export const CinemaGrid = ({ onClick, bookSymbol }) => {
+export const SeatPricesTotal = () => {
+	return <div>yooo adding all seat prices</div>;
+};
+
+export const CinemaGrid = ({ bookSymbol, addPrice }) => {
 	let columns = 22;
 	let rows = 17;
 	let rowElements = [
@@ -94,6 +108,7 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 					bookSymbol={bookSymbol}
 					seatType="TwinSeats"
 					seatPrice={25000}
+					addPrice={addPrice}
 				/>
 			);
 		} else if (index >= 120 && index <= 239) {
@@ -105,6 +120,7 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 					seatType="Vip"
 					color="Navy"
 					seatPrice={50000}
+					addPrice={addPrice}
 				/>
 			);
 		} else if (index >= 240 && index <= 319) {
@@ -116,6 +132,7 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 					color="Olive"
 					seatType="Economy"
 					seatPrice={20000}
+					addPrice={addPrice}
 				/>
 			);
 		} else {
@@ -127,6 +144,7 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 					seatType="Vvip"
 					color="green"
 					seatPrice={100000}
+					addPrice={addPrice}
 				/>
 			);
 		}
@@ -134,13 +152,28 @@ export const CinemaGrid = ({ onClick, bookSymbol }) => {
 	return <div>{gridMap}</div>;
 };
 
-export default class Grid extends Component {
+class Grid extends Component {
 	render() {
 		return (
 			<div>
 				<h2>Cinemax Ticket Booking App</h2>
-				<CinemaGrid />
+				<div>
+					<CinemaGrid addPrice={this.props.addSeatPrices} />
+				</div>
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	addPrices: state.pricesReducer
+});
+
+const mapDispatchToProps = {
+	addSeatPrices
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Grid);
