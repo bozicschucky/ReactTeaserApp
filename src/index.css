@@ -1,14 +1,29 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.cinema__seat{
+  /* background-color: bisque; */
+  background-color: white;
+  width: 65px;
+  height: 50px;
+  outline: 1px solid;
+  float: left;
+  vertical-align:top;
+  /* display:inline-block; */
+  /* display:inline-table */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.grid__parent{
+  display:block;
+}
+.app__container{
+  display:flex;
+  flex-direction: column;
+}
+
+#cinema__grid{
+  margin-right: 30px;
+  border-color: red;
+}
+
+#price__counter{
+  width: 30%;
+  padding-left: 35%;
 }
