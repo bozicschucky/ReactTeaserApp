@@ -1,5 +1,6 @@
 .cinema__seat{
-  background-color: bisque;
+  /* background-color: bisque; */
+  background-color: white;
   width: 65px;
   height: 50px;
   outline: 1px solid;
@@ -11,4 +12,18 @@
 
 .grid__parent{
   display:block;
+}
+.app__container{
+  display:flex;
+  flex-direction: column;
+}
+
+#cinema__grid{
+  margin-right: 30px;
+  border-color: red;
+}
+
+#price__counter{
+  width: 30%;
+  padding-left: 35%;
 }
